@@ -9,7 +9,6 @@ interface Bucket {
 const WINDOW_MS = 60_000;
 const MAX_TRACKED_CLIENTS = 1000;
 
-/** Фіксоване вікно на клієнта (за адресою зʼєднання, а не за спуфабельним X-Forwarded-For). */
 export function rateLimit(limitPerMinute: number): MiddlewareHandler {
   const buckets = new Map<string, Bucket>();
 

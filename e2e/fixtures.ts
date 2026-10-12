@@ -1,10 +1,6 @@
 import { expect, test as base, type Route } from '@playwright/test';
 import { npcRephraseRequestSchema } from '../src/shared/api/contracts/npc-contract';
 
-/**
- * Відповідає ехом: перефразування «не змінює» репліку, тож тести детерміновані
- * й не ходять до реального AI. Заодно перевіряє контракт запиту клієнта.
- */
 export async function echoRephrase(route: Route): Promise<void> {
   const body: unknown = route.request().postDataJSON();
   const request = npcRephraseRequestSchema.parse(body);
@@ -18,8 +14,6 @@ export const test = base.extend({
       pageErrors.push(error);
     });
 
-    // Немокований запит до API це помилка тесту, а не тиха залежність від мережі.
-    // Пізніше зареєстровані маршрути мають пріоритет.
     await page.route('**/api/**', (route) =>
       route.fulfill({ status: 500, json: { error: { code: 'unmocked' } } }),
     );

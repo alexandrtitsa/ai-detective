@@ -1,7 +1,6 @@
 import type { Character, DetectiveCase } from '../model/types';
 import { isCharacter } from './queries';
 
-/** Скільки доказів проти винного гравець має змогу отримати чесно */
 const MIN_CULPRIT_EVIDENCE = 2;
 
 const label = (character: Character) => `"${character.name}" (${character.id})`;
@@ -21,7 +20,6 @@ export function checkSolvability(detectiveCase: DetectiveCase): string[] {
 
   const problems: string[] = [];
 
-  // Докази, які хтось може розкрити чесно (без підготовленої брехні)
   const obtainable = new Set(
     characters.flatMap((character) =>
       character.knownClueIds.filter((clueId) => character.lies[clueId] === undefined),
@@ -47,7 +45,6 @@ export function checkSolvability(detectiveCase: DetectiveCase): string[] {
     (character) => character.id !== culprit.id && evidenceAgainst(character.id) >= culpritEvidence,
   );
   if (equallyImplicated.length > 0) {
-    // Лічильники в тексті: модель бачить, наскільки не вистачає, і може виправити конкретно
     const others = equallyImplicated
       .map((character) => `${label(character)}: ${String(evidenceAgainst(character.id))}`)
       .join(', ');

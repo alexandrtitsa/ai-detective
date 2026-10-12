@@ -24,7 +24,6 @@ export interface Session {
 export const SESSION_KEY = 'ai-detective:session:v1';
 const SESSION_VERSION = 1;
 
-// Вбудована справа проходить ті самі перевірки, що й згенеровані
 export const BUILT_IN_CASE: ActiveCase = {
   detectiveCase: assertPlayableCase(officeDisappearanceCase),
   isGenerated: false,
@@ -47,7 +46,6 @@ const savedSessionSchema = z.object({
 export function serializeSession(session: Session) {
   return {
     version: SESSION_VERSION,
-    // Результат не відновлюємо: після нього починається нова гра
     phase: session.phase === 'result' ? 'start' : session.phase,
     difficulty: session.difficulty,
     isGenerated: session.activeCase.isGenerated,
@@ -55,13 +53,11 @@ export function serializeSession(session: Session) {
   };
 }
 
-/** undefined означає «збереження непридатне»: викликач починає з початкової сесії. */
 export function restoreSession(raw: unknown): Session | undefined {
   const parsed = savedSessionSchema.safeParse(raw);
   if (!parsed.success) return undefined;
 
   const { phase, difficulty, isGenerated, detectiveCase } = parsed.data;
-  // Сховищу не довіряємо: справа проходить ті самі перевірки, що й згенерована
   if (analyzeCase(detectiveCase).length > 0) return undefined;
 
   return { phase, difficulty, activeCase: { detectiveCase, isGenerated } };

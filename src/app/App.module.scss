@@ -26,7 +26,6 @@
   }
 }
 
-// Верхня смуга як у макеті: щільна, на темній «інсетній» поверхні
 .header,
 .footer {
   padding: var(--space-3) var(--space-6);
@@ -67,12 +66,10 @@
   margin-inline: auto;
   padding-block: var(--space-6);
 
-  // Фокус виставляється програмно, видимий outline тут зайвий
   &:focus {
     outline: none;
   }
 
-  // Сторінка гри заповнює висоту й не скролиться; довші екрани (старт) скролляться тут
   @include m.desktop-fit {
     min-block-size: 0;
     padding-block: var(--space-4);

@@ -43,7 +43,6 @@ export function createCaseGenerator(
             model,
             timeoutMs: attemptTimeoutMs,
             maxTokens: 4000,
-            // Задача на виконання обмежень, а не творчість: низька температура дає менше порушень
             temperature: 0.4,
           });
 
@@ -52,7 +51,6 @@ export function createCaseGenerator(
 
           problems = outcome.problems;
           console.warn(`[case] спробу ${String(attempt)} відхилено: ${problems.join('; ')}`);
-          // Модель бачить власну відповідь і перелік проблем, тож виправляє, а не починає з нуля
           messages.push(
             { role: 'assistant', content: raw },
             { role: 'user', content: buildRepairPrompt(problems) },

@@ -5,7 +5,6 @@ export type ConversionResult =
   | { readonly ok: true; readonly value: DetectiveCase }
   | { readonly ok: false; readonly problems: readonly string[] };
 
-/** id формує код, а не модель: префікс гарантує унікальність між видами сутностей */
 const ids = {
   character: (key: string) => `char-${key}`,
   location: (key: string) => `loc-${key}`,
@@ -150,7 +149,6 @@ export function blueprintToCase(input: CaseBlueprint, id: string): ConversionRes
       entities: [...characters, ...locations, ...objects, ...events],
       clues,
       culpritId: ids.character(blueprint.culpritKey),
-      // Ліміт питань це параметр коду: AI його не визначає
       maxQuestions: Math.min(
         MAX_QUESTIONS,
         Math.max(MIN_QUESTIONS, blueprint.clues.length * QUESTIONS_PER_CLUE),

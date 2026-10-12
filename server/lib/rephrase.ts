@@ -79,7 +79,6 @@ export function createRephraseService(
           },
         );
       } catch (error) {
-        // Клієнт не скасовував, а загальний дедлайн вичерпано: це наш timeout
         if (!clientSignal.aborted && totalSignal.aborted) {
           throw new UpstreamError('timeout', 'Загальний дедлайн AI вичерпано', {
             retryable: false,

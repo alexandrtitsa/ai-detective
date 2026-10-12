@@ -19,7 +19,6 @@ const entitySchema = z.discriminatedUnion('kind', [
   z.object({ ...baseEntity, kind: z.literal('event') }),
 ]);
 
-/** Межа довіри до сховища: перевіряє форму. Змістовні перевірки робить analyzeCase. */
 export const detectiveCaseSchema = z.object({
   id,
   title: text(120),

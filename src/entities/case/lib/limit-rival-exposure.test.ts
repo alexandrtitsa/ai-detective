@@ -10,7 +10,6 @@ const problemsOf = (candidate: CaseBlueprint) => {
   return converted.ok ? analyzeCase(converted.value) : converted.problems;
 };
 
-// Марина згадана ще у двох доказах проти Андрія: вона викрита більше за винного
 const framed: CaseBlueprint = {
   ...blueprint,
   clues: blueprint.clues.map((clue) =>

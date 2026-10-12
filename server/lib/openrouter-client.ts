@@ -10,12 +10,10 @@ export interface ChatMessage {
 }
 
 export interface CompleteRequest {
-  /** Назва JSON-схеми для response_format */
   readonly name: string;
   readonly schema: Record<string, unknown>;
   readonly messages: readonly ChatMessage[];
   readonly signal: AbortSignal;
-  /** Перевизначення для важчих запитів (генерація справ) */
   readonly model?: string | undefined;
   readonly timeoutMs?: number | undefined;
   readonly maxTokens?: number | undefined;
@@ -23,7 +21,6 @@ export interface CompleteRequest {
 }
 
 export interface OpenRouterClient {
-  /** Одна спроба. Повтори й валідацію робить виклик вище. Повертає JSON-рядок від моделі. */
   complete(request: CompleteRequest): Promise<string>;
 }
 
@@ -39,11 +36,11 @@ function parseRetryAfter(value: string | null): number | undefined {
 
 async function toHttpError(response: Response): Promise<UpstreamError> {
   const { status } = response;
-  const detail = (await response.text().catch(() => '')).slice(0, 200); // лише для логів сервера
+  const detail = (await response.text().catch(() => '')).slice(0, 200);
   const message = `OpenRouter responded ${String(status)}: ${detail}`;
 
   if (status === 401 || status === 402 || status === 403) {
-    return new UpstreamError('auth', message, { retryable: false }); // ключ або баланс
+    return new UpstreamError('auth', message, { retryable: false });
   }
   if (status === 429) {
     const retryAfterMs = parseRetryAfter(response.headers.get('retry-after'));
@@ -82,12 +79,11 @@ export function createOpenRouterClient(config: ServerConfig): OpenRouterClient {
               type: 'json_schema',
               json_schema: { name, strict: true, schema },
             },
-            // Лише ендпоінти, що підтримують structured outputs
             provider: { require_parameters: true },
           }),
         });
       } catch (error) {
-        if (callerSignal.aborted) throw error; // скасовано зверху: не збій апстріму
+        if (callerSignal.aborted) throw error;
         const timedOut = error instanceof Error && error.name === 'TimeoutError';
         throw new UpstreamError(timedOut ? 'timeout' : 'network', 'OpenRouter request failed', {
           retryable: true,

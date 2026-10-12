@@ -15,7 +15,6 @@ test.describe('ігровий сценарій', () => {
     await app.ask(ids.marina, ids.nightDeploy);
     await expect(app.journal.getByText(texts.deployClue)).toBeVisible();
 
-    // Під тиском доказу Андрій зізнається (політика cracks)
     await app.ask(ids.andriy, ids.nightDeploy);
     await expect(app.interrogation.getByText(texts.deployClue)).toHaveCount(2);
 

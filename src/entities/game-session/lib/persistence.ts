@@ -42,7 +42,6 @@ const savedGameSchema = z.object({
 type SavedGame = z.infer<typeof savedGameSchema>;
 type SavedEntry = SavedGame['log'][number];
 
-/** Справу не зберігаємо тут (вона в сесії), а помилку не відновлюємо: це стан одного показу. */
 export function serializeGame(state: GameState) {
   return {
     version: GAME_VERSION,
@@ -65,8 +64,6 @@ function isAccusationConsistent(saved: SavedGame, detectiveCase: DetectiveCase):
   }
   return (saved.status === 'won') === (saved.accusedId === detectiveCase.culpritId);
 }
-
-/** Інваріанти, які гарантує reducer. Якщо вони порушені, збереження підроблене або застаріло. */
 function isConsistent(saved: SavedGame, detectiveCase: DetectiveCase): boolean {
   const clueIds = new Set(detectiveCase.clues.map((clue) => clue.id));
   const revealed = [
@@ -124,7 +121,6 @@ function toLogEntry(entry: SavedEntry): LogEntry {
   };
 }
 
-/** undefined означає «збереження непридатне»: викликач починає нову партію. */
 export function restoreGame(raw: unknown, detectiveCase: DetectiveCase): GameState | undefined {
   const parsed = savedGameSchema.safeParse(raw);
   if (!parsed.success) return undefined;

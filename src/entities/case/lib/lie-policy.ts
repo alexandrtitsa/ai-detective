@@ -9,12 +9,10 @@ export interface LieDecisionInput {
   readonly discoveredClueIds: readonly string[];
 }
 
-/** true означає, що NPC використає підготовлену брехню (якщо вона є у факті) */
 export type LiePolicy = (input: LieDecisionInput) => boolean;
 
 export const LIE_POLICIES: Readonly<Record<LiePolicyId, LiePolicy>> = {
   never: () => false,
   always: () => true,
-  // Тиск доказів: коли гравець має незалежне підтвердження, брехати безглуздо
   cracks: ({ fact, discoveredClueIds }) => !discoveredClueIds.includes(fact.clueId),
 };

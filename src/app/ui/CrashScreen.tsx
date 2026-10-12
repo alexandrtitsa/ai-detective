@@ -8,7 +8,6 @@ export function CrashScreen() {
   };
 
   const resetAndReload = () => {
-    // Збережений стан міг і спричинити збій: без скидання він зациклив би його
     clearSavedProgress();
     window.location.reload();
   };

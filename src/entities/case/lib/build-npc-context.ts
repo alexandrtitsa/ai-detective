@@ -1,7 +1,6 @@
 import type { DetectiveCase, NpcContext, NpcFact } from '../model/types';
 import { findCharacter, findClue } from './queries';
 
-/** Межа обмеження контексту: лише те, що знає цей NPC. */
 export function buildNpcContext(detectiveCase: DetectiveCase, npcId: string): NpcContext {
   const npc = findCharacter(detectiveCase, npcId);
   if (npc === undefined) {

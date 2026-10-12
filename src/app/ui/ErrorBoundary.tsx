@@ -9,7 +9,6 @@ interface ErrorBoundaryState {
   readonly hasError: boolean;
 }
 
-/** Ловить помилки рендеру й завантаження ліниво підключених чанків. */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   override state: ErrorBoundaryState = { hasError: false };
 

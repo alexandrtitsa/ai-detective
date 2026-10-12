@@ -5,7 +5,6 @@ import { GameApp, ids } from './game-app';
 
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
-/** Чекає завершення анімацій: напівпрозорий елемент дав би хибні спрацювання color-contrast */
 async function settle(page: Page): Promise<void> {
   await page.waitForFunction(() => document.getAnimations().length === 0);
 }

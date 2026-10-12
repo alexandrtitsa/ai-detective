@@ -10,7 +10,6 @@ import styles from './App.module.scss';
 import { loadInitialSession, saveSession } from './model/saved-progress';
 import { BUILT_IN_CASE, type Phase, type Session } from './model/session';
 
-// Окремий чанк: гра важча за стартовий екран, а помилку завантаження ловить ErrorBoundary
 const GamePage = lazy(() => import('@/pages/game').then((module) => ({ default: module.GamePage })));
 
 const TITLES = {
@@ -25,17 +24,13 @@ export function App() {
   const isFirstRender = useRef(true);
   const { phase } = session;
 
-  // Сесія (справа, складність, фаза) зберігається при кожній зміні
   useEffect(() => {
     saveSession(session);
   }, [session]);
-
-  // SPA без роутера: заголовок документа повідомляє екранним читачам, де вони (WCAG 2.4.2)
   useEffect(() => {
     document.title = `${TITLES[phase]} · AI Detective`;
   }, [phase]);
 
-  // Керування фокусом при зміні "сторінки" (a11y для SPA без роутера)
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -76,7 +71,6 @@ export function App() {
   }, []);
 
   return (
-    // reducedMotion="user": при «зменшенні руху» transform і layout вимикаються, лишається opacity
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadMotionFeatures} strict>
         <div className={styles.app}>

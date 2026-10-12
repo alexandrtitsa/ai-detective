@@ -5,7 +5,6 @@ import { gzipSync } from 'node:zlib';
 
 const KB = 1024;
 
-// Стартові ліміти (gzip). Відкалібруй після першого запуску: поточний розмір + ~10% запасу.
 const BUDGETS = {
   initialJs: 130 * KB,
   totalJs: 230 * KB,
@@ -26,7 +25,6 @@ const assets = readdirSync(assetsDir).map((name) => ({
 const js = assets.filter((file) => file.name.endsWith('.js'));
 const css = assets.filter((file) => file.name.endsWith('.css'));
 
-// Початкове завантаження: усе, на що посилається index.html (скрипт і modulepreload)
 const html = readFileSync(join(distDir, 'index.html'), 'utf8');
 const initialNames = new Set(
   [...html.matchAll(/\/assets\/([\w.-]+\.js)/g)].map((match) => match[1]),

@@ -33,7 +33,6 @@ const app = new Hono();
 
 app.use(logger());
 app.use('/api/*', secureHeaders(), rateLimit(config.RATE_LIMIT_PER_MINUTE));
-// Генерація дорога й повільна: окремий, суворіший ліміт
 app.use('/api/case/*', rateLimit(config.CASE_RATE_LIMIT_PER_MINUTE));
 app.get('/api/health', (c) => c.json({ ok: true }));
 app.route('/api/npc', createNpcRoutes(rephraseService));

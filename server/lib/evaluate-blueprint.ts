@@ -8,7 +8,6 @@ export type BlueprintEvaluation =
   | { readonly ok: true; readonly blueprint: CaseBlueprint }
   | { readonly ok: false; readonly problems: readonly string[] };
 
-/** Схема → нормалізація → мапінг → розв'язність. Перша ж непройдена стадія повертає проблеми для виправлення. */
 export function evaluateBlueprint(raw: string): BlueprintEvaluation {
   let json: unknown;
   try {
@@ -27,7 +26,6 @@ export function evaluateBlueprint(raw: string): BlueprintEvaluation {
     };
   }
 
-  // Нічию за викритістю код розв'язує сам: модель її не виправляє навіть із підказками
   const blueprint = limitRivalExposure(parsed.data);
 
   const converted = blueprintToCase(blueprint, 'validation');

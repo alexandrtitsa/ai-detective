@@ -32,7 +32,6 @@ export function buildCaseMessages(request: CaseGenerationRequest): ChatMessage[]
   ];
 }
 
-/** Помилки валідації говорять id (char-marina), а модель працює з ключами (marina): прибираємо префікси */
 const toKeys = (problem: string): string =>
   problem.replace(/(["(])(?:char|loc|obj|evt|clue)-/g, '$1');
 

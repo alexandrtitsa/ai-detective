@@ -17,7 +17,6 @@ export function findClue(detectiveCase: DetectiveCase, id: string): Clue | undef
   return detectiveCase.clues.find((clue) => clue.id === id);
 }
 
-/** Чи має NPC хоч один факт, повʼязаний із темою. Без цього відповіддю буде «нічого не знаю». */
 export function canTellAbout(detectiveCase: DetectiveCase, npcId: string, topicId: string): boolean {
   const npc = findCharacter(detectiveCase, npcId);
   if (npc === undefined) return false;

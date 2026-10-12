@@ -5,7 +5,6 @@ export function respondWithError(c: Context, error: unknown) {
   if (c.req.raw.signal.aborted) return c.body(null, 204); // клієнт сам відмовився чекати
 
   if (error instanceof UpstreamError) {
-    // Деталі лише в логах сервера, клієнту віддаємо тільки код
     console.error(`[ai] ${error.failure}: ${error.message}`);
 
     switch (error.failure) {

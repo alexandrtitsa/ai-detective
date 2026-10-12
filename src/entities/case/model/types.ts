@@ -49,17 +49,13 @@ export interface NpcAnswer {
   readonly wasLie: boolean;
 }
 
-/** Факт, який NPC знає про один доказ */
 export interface NpcFact {
   readonly clueId: string;
   readonly relatedEntityIds: readonly string[];
-  /** Правдива версія */
   readonly truth: string;
-  /** Підготовлена брехня. Чи скористається нею NPC, вирішує LiePolicy */
   readonly lie?: string;
 }
 
-/** Усе, що NPC дозволено знати. Без culpritId, чужих знань і стану гри. */
 export interface NpcContext {
   readonly persona: {
     readonly id: string;

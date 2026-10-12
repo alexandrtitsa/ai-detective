@@ -7,7 +7,6 @@ interface ResilienceOptions {
   readonly baseDelayMs?: number;
 }
 
-/** Декоратор: повторює лише тимчасові збої апстріму (429, 5xx, мережа, таймаут). */
 export function withRetries(
   client: OpenRouterClient,
   options: ResilienceOptions,

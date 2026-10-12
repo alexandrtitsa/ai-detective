@@ -42,7 +42,6 @@ export class GameApp {
     await expect(this.interrogation).toBeVisible();
   }
 
-  /** Лише ставить питання. Очікування відповіді залежить від сценарію і лежить на тесті. */
   async ask(npcId: string, topicId: string): Promise<void> {
     await this.page.getByLabel('Кого допитуємо').selectOption(npcId);
     await this.page.getByLabel('Про що питаємо').selectOption(topicId);
