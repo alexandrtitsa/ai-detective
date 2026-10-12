@@ -1,0 +1,30 @@
+.page {
+  display: grid;
+  gap: var(--space-6);
+  max-inline-size: 48rem;
+}
+
+.intro {
+  display: grid;
+  gap: var(--space-4);
+
+  h1 {
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.015em;
+  }
+
+  p {
+    color: var(--color-text-muted);
+  }
+}
+
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

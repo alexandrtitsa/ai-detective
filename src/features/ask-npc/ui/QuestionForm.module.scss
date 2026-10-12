@@ -1,0 +1,24 @@
+@use '@/shared/styles/mixins' as m;
+
+.form {
+  display: grid;
+  gap: var(--space-3);
+
+  @include m.up('md') {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+    align-items: end;
+  }
+}
+
+.actions {
+  display: flex;
+}
+
+.hint {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+
+  @include m.up('md') {
+    grid-column: 1 / -1;
+  }
+}

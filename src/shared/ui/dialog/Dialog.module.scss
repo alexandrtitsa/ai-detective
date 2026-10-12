@@ -1,0 +1,36 @@
+.dialog {
+  inline-size: min(90vw, 28rem);
+  margin: auto;
+  padding: var(--space-6);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+
+  &::backdrop {
+    background: rgb(3 12 18 / 0.7);
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+}
+
+@starting-style {
+  .dialog[open] {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+
+  .dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.title {
+  margin-block-end: var(--space-3);
+  font-size: var(--font-size-lg);
+}

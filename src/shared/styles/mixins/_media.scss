@@ -1,0 +1,20 @@
+@use 'sass:map';
+
+$breakpoints: (
+  'sm': 40rem,
+  'md': 48rem,
+  'lg': 64rem,
+  'xl': 80rem,
+);
+
+@mixin desktop-fit {
+  @media (min-width: map.get($breakpoints, 'xl')) and (min-height: 40rem) {
+    @content;
+  }
+}
+
+@mixin up($key) {
+  @media (min-width: map.get($breakpoints, $key)) {
+    @content;
+  }
+}

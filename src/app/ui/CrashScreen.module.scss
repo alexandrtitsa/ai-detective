@@ -1,0 +1,12 @@
+.screen {
+  display: grid;
+  gap: var(--space-4);
+  inline-size: min(100% - var(--space-8), 40rem);
+  margin: var(--space-12) auto;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

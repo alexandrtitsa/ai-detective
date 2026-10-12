@@ -1,0 +1,5 @@
+@use '@/shared/styles/mixins' as m;
+
+.region {
+  @include m.visually-hidden;
+}

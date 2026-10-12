@@ -1,0 +1,14 @@
+@use 'colors';
+@use 'scale';
+
+// Тема за замовчуванням темна (як у макеті). Світла вмикається атрибутом data-theme="light".
+:root {
+  color-scheme: dark;
+  @include colors.emit(colors.$dark);
+  @include scale.emit;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  @include colors.emit(colors.$light);
+}

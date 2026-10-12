@@ -1,0 +1,53 @@
+// Палітра «оперативна консоль»: темно-бірюзова база, світліші панелі, холодний блакитний акцент
+// і бурштиновий маркер для доказів. Контраст перевірено під WCAG 2.2 AA:
+// text/muted ≥ 5.4:1 на всіх поверхнях, border-strong ≥ 3.4:1 (WCAG 1.4.11).
+// Правило: акцентний ТЕКСТ лише на surface/inset, не на accent-soft (там 3.9:1).
+$dark: (
+  'bg': #07161f,
+  'surface': #11364a,
+  'surface-raised': #1b4a62,
+  'inset': #0b2736,
+  'text': #e8f4f8,
+  'text-muted': #a9c8d6,
+  'border': #2a6a86,
+  'border-strong': #5aa6c2,
+  'accent': #62c8e4,
+  'accent-contrast': #04202b,
+  'accent-soft': #1f5a74,
+  'marker': #f2c14e,
+  'danger': #ff9b8e,
+  'grid': rgb(98 200 228 / 0.06),
+  'shadow': rgb(0 0 0 / 0.45),
+  'kind-character': #7fd3a0,
+  'kind-location': #b79cf2,
+  'kind-object': #f2c14e,
+  'kind-event': #62c8e4,
+);
+
+$light: (
+  'bg': #dfeaef,
+  'surface': #f3f9fb,
+  'surface-raised': #ffffff,
+  'inset': #e4eff3,
+  'text': #0b2230,
+  'text-muted': #42606f,
+  'border': #a9c4d0,
+  'border-strong': #5f8799,
+  'accent': #0a6784,
+  'accent-contrast': #ffffff,
+  'accent-soft': #d0e8f0,
+  'marker': #8a5a00,
+  'danger': #b42318,
+  'grid': rgb(10 103 132 / 0.07),
+  'shadow': rgb(11 34 48 / 0.14),
+  'kind-character': #1f8a4c,
+  'kind-location': #6b4bc4,
+  'kind-object': #b07a00,
+  'kind-event': #0a6784,
+);
+
+@mixin emit($tokens) {
+  @each $name, $value in $tokens {
+    --color-#{$name}: #{$value};
+  }
+}

@@ -1,0 +1,47 @@
+$space: (
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  6: 1.5rem,
+  8: 2rem,
+  12: 3rem,
+);
+$radius: (
+  'sm': 0.25rem,
+  'md': 0.5rem,
+  'lg': 1rem,
+);
+$font-size: (
+  'sm': 0.875rem,
+  'md': 1rem,
+  'lg': clamp(1.125rem, 1rem + 0.5vw, 1.375rem),
+  'xl': clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem),
+);
+// Рух: швидкий ease-out (Emil Kowalski): миттєвий відгук, плавне гальмування.
+$duration: (
+  'fast': 0.14s,
+  'base': 0.2s,
+);
+
+@mixin emit {
+  @each $key, $value in $space {
+    --space-#{$key}: #{$value};
+  }
+  @each $key, $value in $radius {
+    --radius-#{$key}: #{$value};
+  }
+  @each $key, $value in $font-size {
+    --font-size-#{$key}: #{$value};
+  }
+  @each $key, $value in $duration {
+    --duration-#{$key}: #{$value};
+  }
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --shadow-sm: 0 1px 2px var(--color-shadow);
+  --shadow-md: 0 1px 2px var(--color-shadow), 0 8px 24px -12px var(--color-shadow);
+  // Системні шрифти: нуль байтів у бандлі.
+  --font-family-base: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-family-display: var(--font-family-base);
+  --font-family-mono: ui-monospace, 'Cascadia Code', monospace;
+}

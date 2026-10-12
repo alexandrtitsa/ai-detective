@@ -1,0 +1,93 @@
+@use '@/shared/styles/mixins' as m;
+
+.app {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-block-size: 100dvh;
+
+  @include m.desktop-fit {
+    block-size: 100dvh;
+    overflow: hidden;
+  }
+}
+
+.skipLink {
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-start: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+  }
+}
+
+// Верхня смуга як у макеті: щільна, на темній «інсетній» поверхні
+.header,
+.footer {
+  padding: var(--space-3) var(--space-6);
+}
+
+.header {
+  border-block-end: 2px solid var(--color-border);
+  background: var(--color-inset);
+}
+
+.footer {
+  border-block-start: 2px solid var(--color-border);
+  background: var(--color-inset);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    inline-size: 0.7em;
+    block-size: 0.7em;
+    background: var(--color-accent);
+    transform: rotate(45deg);
+  }
+}
+
+.main {
+  inline-size: min(100% - var(--space-8), 96rem);
+  margin-inline: auto;
+  padding-block: var(--space-6);
+
+  // Фокус виставляється програмно, видимий outline тут зайвий
+  &:focus {
+    outline: none;
+  }
+
+  // Сторінка гри заповнює висоту й не скролиться; довші екрани (старт) скролляться тут
+  @include m.desktop-fit {
+    min-block-size: 0;
+    padding-block: var(--space-4);
+    overflow: auto;
+
+    > * {
+      block-size: 100%;
+    }
+  }
+}
+
+.fallback {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-8);
+  color: var(--color-text-muted);
+}

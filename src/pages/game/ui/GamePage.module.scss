@@ -1,0 +1,95 @@
+@use '@/shared/styles/mixins' as m;
+
+.page {
+  display: grid;
+  gap: var(--space-4);
+
+  @include m.desktop-fit {
+    block-size: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+
+  @include m.desktop-fit {
+    flex: none;
+    padding: var(--space-3) var(--space-6);
+  }
+}
+
+.heading {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--font-size-xl);
+}
+
+.premise {
+  max-inline-size: 70ch;
+  color: var(--color-text-muted);
+
+  @include m.desktop-fit {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+}
+
+.layout {
+  display: grid;
+  align-items: start;
+  gap: var(--space-4);
+
+  @include m.up('lg') {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  }
+
+  @include m.up('xl') {
+    grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.7fr) minmax(16rem, 1fr);
+  }
+
+  @include m.desktop-fit {
+    flex: 1;
+    align-items: stretch;
+    grid-template-rows: minmax(0, 1fr);
+    min-block-size: 0;
+  }
+}
+
+.sidebar {
+  display: grid;
+  align-items: start;
+  gap: var(--space-4);
+
+  @include m.up('lg') {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include m.up('xl') {
+    grid-column: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @include m.desktop-fit {
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-items: stretch;
+    min-block-size: 0;
+  }
+}

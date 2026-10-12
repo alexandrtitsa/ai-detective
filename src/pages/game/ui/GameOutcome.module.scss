@@ -1,0 +1,21 @@
+.outcome {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.won {
+  border-color: var(--color-accent);
+}
+
+.lost {
+  border-color: var(--color-danger);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+}

@@ -1,0 +1,7 @@
+.alert {
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--color-danger);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, var(--color-danger) 12%, var(--color-inset));
+  color: var(--color-text);
+}

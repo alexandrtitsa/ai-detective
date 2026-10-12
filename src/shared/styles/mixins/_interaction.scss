@@ -1,0 +1,13 @@
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin press($scale: 0.97) {
+  &:active {
+    transform: scale($scale);
+  }
+}

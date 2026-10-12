@@ -1,0 +1,65 @@
+@use '@/shared/styles/mixins' as m;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-block-size: 2.75rem;
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+
+  @include m.focus-ring;
+
+  &:not([aria-disabled='true'], :disabled) {
+    @include m.press;
+  }
+
+  &[aria-disabled='true'],
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+
+  &:not([aria-disabled='true'], :disabled) {
+    @include m.hover {
+      background: color-mix(in oklch, var(--color-accent), white 22%);
+    }
+  }
+}
+
+.secondary {
+  border-color: var(--color-border-strong);
+  background: var(--color-inset);
+  color: var(--color-text);
+
+  &:not([aria-disabled='true'], :disabled) {
+    @include m.hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+    }
+  }
+}
+
+.danger {
+  background: var(--color-danger);
+  color: var(--color-accent-contrast);
+
+  &:not([aria-disabled='true'], :disabled) {
+    @include m.hover {
+      background: color-mix(in oklch, var(--color-danger), white 20%);
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@use '@/shared/styles/mixins' as m;
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.input {
+  min-block-size: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-inset);
+  color: var(--color-text);
+  transition: border-color var(--duration-fast) var(--ease-out);
+
+  @include m.hover {
+    border-color: var(--color-accent);
+  }
+
+  @include m.focus-ring;
+
+  &:focus-visible {
+    border-color: var(--color-accent);
+  }
+}
+
+.hint {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
